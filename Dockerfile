@@ -1,11 +1,10 @@
 
 
-FROM ubuntu:20.10
+FROM python:3
 
 COPY requirements.txt requirements.txt
-RUN set -xe \
-    && apt-get update \
-    && apt-get install python3-pip
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends python3-pip
 
 RUN pip install -r requirements.txt
 
