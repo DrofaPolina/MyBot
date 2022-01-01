@@ -7,7 +7,7 @@ bot = telebot.TeleBot("2086054651:AAF_PuqicSmPFdvWMkFIaSXobKmElwL5A7c", parse_mo
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, "Hello!")
+    bot.reply_to(message, "Hello!!!")
 
 help_cnt = 0
 @bot.message_handler(commands=['help'])
