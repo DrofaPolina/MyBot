@@ -1,21 +1,21 @@
-import telebot
-from telebot import types
 import os
 
+import telebot
+from telebot import types
 
-bot = telebot.TeleBot("2086054651:AAF_PuqicSmPFdvWMkFIaSXobKmElwL5A7c", parse_mode=None) 
+bot = telebot.TeleBot("2086054651:AAF_PuqicSmPFdvWMkFIaSXobKmElwL5A7c")
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     bot.reply_to(message, "Hello!!!")
 
-help_cnt = 0
+HELP_CNT = 0
 @bot.message_handler(commands=['help'])
-def send_welcome(message):
-    global help_cnt
-    if help_cnt < 1:
+def answer_help(message):
+    global HELP_CNT
+    if HELP_CNT < 1:
         bot.reply_to(message, "Type 'Hi' or anything else")
-        help_cnt += 1
+        HELP_CNT += 1
     else:
         bot.reply_to(message, "No more help")
 
@@ -25,13 +25,11 @@ def create_point(message):
     bot.send_message(message.from_user.id, "one more...")
     bot.send_message(message.from_user.id, "Ok, write")
     bot.register_next_step_handler(message, addtolist)
-    
+
 def addtolist(message):
     with open('todolist.txt', 'a') as f:
         print(message.text, file = f)
     bot.send_message(message.from_user.id, "Your list has become longer")
-
-# from new_f import new_funk
 
 @bot.message_handler(commands=['deletepoint'])
 def delete_point(message):
@@ -39,7 +37,7 @@ def delete_point(message):
     bot.send_message(message.from_user.id, "What would you like to delete?")
     # new_funk()
     bot.register_next_step_handler(message, delfromlist)
-    
+
 def delfromlist(message):
     flag = False
     with open('todolist.txt', 'r') as tdl:
@@ -57,8 +55,6 @@ def delfromlist(message):
     f = open("tmp.txt","w")
     f.close()
 
-
-
 @bot.message_handler(commands=['output'])
 def output_(message):
     bot.send_message(message.from_user.id, "okey, have a look")
@@ -66,7 +62,6 @@ def output_(message):
         
         for line in tdl:
             bot.send_message(message.from_user.id, "- "+line)
-
 
 name = '';
 surname = '';
@@ -84,7 +79,6 @@ def start(message):
         hi_cnt += 1
     else:
         bot.reply_to(message, message.text+"\n"+"\n"+"if you wanna be friends, type /makefriends")
-    
 
 def get_name(message):
     global name
@@ -109,8 +103,4 @@ def get_surname(message):
 def handle_text_doc(message):
     bot.reply_to(message, "Here is a document, right?")
 
-
 bot.infinity_polling()
-
-
-

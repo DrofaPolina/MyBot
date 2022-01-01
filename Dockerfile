@@ -9,4 +9,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD [ "python3", "echo_bot.py"]
+RUN pylint --errors-only echo_bot.py
+
+# CMD [ "python3", "echo_bot.py"]
