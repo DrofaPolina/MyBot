@@ -16,4 +16,3 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag bot_image
-    - run: sudo docker run --name=bot_image bot_image
